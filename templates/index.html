@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy Stocks
+{% endblock %}
+
+{% block main %}
+<main class="container">
+<table class="table">
+    <thead>
+        <tr>
+            <th class="cell_left">Symbol</th>
+            <th class="cell_left">Name</th>
+            <th class="cell-right">Shares</th>
+            <th class="cell-right">Price</th>
+            <th class="cell-right">TOTAL</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in positions %}
+            <tr>
+                <td class="cell_left">{{ entry['symbol'] }}</td>
+                <td class="cell_left">{{ entry['company'] }}</td>
+                <td class="cell-right">{{ entry['shares'] | int }}</td>
+                <td class="cell-right">{{ entry['price'] | usd }}</td>
+                <td class="cell-right">{{ entry['value'] | usd }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="cell-right cell-bold" colspan="4">Cash</td>
+            <td class="cell-right">{{ cash | usd }}</td>
+        </tr>
+        <tr>
+            <td class="cell-right cell-bold" colspan="4">TOTAL</td>
+            <td class="cell-right">{{ total | usd }}</td>
+        </tr>
+    </tfoot>
+</table>
+</main>
+{% endblock %}
